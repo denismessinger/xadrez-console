@@ -11,9 +11,22 @@ namespace MyApp
         {
             try
             {
-                PosicaoXadrez p = new PosicaoXadrez('a', 1);
+                PartidaDeXadres partida = new PartidaDeXadres();   
+                while (!partida.terminada)
+                {
+                    Console.Clear();
+                    Tela.imprimirTabuleiro(partida.tab);
 
-                Console.WriteLine(p.toPosicao());
+                    Console.Write("Digite a posição de origem: ");
+                    Posicao origem = Tela.lerPosicaoXadrez().toPosicao();
+                    Console.WriteLine();
+                    Console.Write("Digite a posição de destino: ");
+                    Posicao destino = Tela.lerPosicaoXadrez().toPosicao();
+
+                    partida.executaMovimento(origem, destino);
+                }
+                
+
             }
             catch (TabuleiroException e)
             {
