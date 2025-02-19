@@ -9,9 +9,20 @@ namespace MyApp
     {
         static void Main(string[] args)
         {
-            Tabuleiro p = new Tabuleiro(8, 8);
-            p.colocarPeca(new Torre(Cor.Preta, p), new Posicao(0, 1));
-            Tela.imprimirTabuleiro(p);
+            try
+            {
+                Tabuleiro p = new Tabuleiro(8, 8);
+
+                p.colocarPeca(new Torre(Cor.Preta, p), new Posicao(0, 1));
+                p.colocarPeca(new Torre(Cor.Preta, p), new Posicao(0, 1));
+
+                Tela.imprimirTabuleiro(p);
+            }
+            catch (TabuleiroException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            
         }
     }
 }
