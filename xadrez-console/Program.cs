@@ -11,12 +11,9 @@ namespace MyApp
         {
             try
             {
-                Tabuleiro p = new Tabuleiro(8, 8);
+                PosicaoXadrez p = new PosicaoXadrez('a', 1);
 
-                p.colocarPeca(new Torre(Cor.Preta, p), new Posicao(0, 1));
-                p.colocarPeca(new Torre(Cor.Preta, p), new Posicao(0, 1));
-
-                Tela.imprimirTabuleiro(p);
+                Console.WriteLine(p.toPosicao());
             }
             catch (TabuleiroException e)
             {
