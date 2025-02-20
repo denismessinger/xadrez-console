@@ -9,6 +9,13 @@
             this.linha = linha;
             this.coluna = coluna;
         }
+
+        public void definirValores(int linhas, int colunas)
+        {
+            this.linha = linhas;
+            this.coluna = colunas;
+        }
+
         public override string ToString()
         {
             return linha + "," + coluna;
