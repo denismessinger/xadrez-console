@@ -18,9 +18,7 @@ namespace MyApp
                     {
                         Console.Clear();
                         Tela.imprimirPartida(partida);
-                        Console.WriteLine();
-                        Console.WriteLine("Turno: " + partida.turno);
-                        Console.WriteLine("Aguardando jogada " + partida.jogadorAtual);
+                        
                         Console.Write("Digite a posição de origem: ");
                         Posicao origem = Tela.lerPosicaoXadrez().toPosicao();
                         partida.validarPosicaoDeOrigem(origem);
