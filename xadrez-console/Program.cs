@@ -11,7 +11,7 @@ namespace MyApp
         {
             try
             {
-                PartidaDeXadres partida = new PartidaDeXadres();   
+                PartidaDeXadrez partida = new PartidaDeXadrez();   
                 while (!partida.terminada)
                 {
                     try

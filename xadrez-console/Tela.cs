@@ -10,7 +10,7 @@ namespace xadrez_console
 {
     class Tela
     {
-        public static void imprimirPartida(PartidaDeXadres partida)
+        public static void imprimirPartida(PartidaDeXadrez partida)
         {
             imprimirTabuleiro(partida.tab);
             Console.WriteLine();
@@ -33,7 +33,7 @@ namespace xadrez_console
             
         }
 
-        public static void imprimirPecasCapturadas(PartidaDeXadres partida)
+        public static void imprimirPecasCapturadas(PartidaDeXadrez partida)
         {
             Console.WriteLine("Peças capturadas:");
             Console.Write("Brancas: ");
