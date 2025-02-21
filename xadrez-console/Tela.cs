@@ -101,10 +101,29 @@ namespace xadrez_console
         public static PosicaoXadrez lerPosicaoXadrez()
         {
             string s = Console.ReadLine();
+
+            if (string.IsNullOrEmpty(s) || s.Length != 2)
+            {
+                throw new TabuleiroException("Posição inválida! Digite uma posição no formato correto (ex: a1, h8).");
+            }
+
             char coluna = s[0];
-            int linha = int.Parse(s[1] + "");
+            int linha;
+
+            if (!int.TryParse(s[1].ToString(), out linha))
+            {
+                throw new TabuleiroException("Posição inválida! O segundo caractere deve ser um número entre 1 e 8.");
+            }
+
+
+            if (coluna < 'a' || coluna > 'h' || linha < 1 || linha > 8)
+            {
+                throw new TabuleiroException("Posição inválida! A coluna deve ser entre 'a' e 'h' e a linha entre 1 e 8.");
+            }
+
             return new PosicaoXadrez(coluna, linha);
         }
+
         public static void imprimirPeca(Peca peca)
         {
             if (peca == null)

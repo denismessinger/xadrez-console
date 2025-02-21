@@ -294,6 +294,7 @@ namespace xadrez
             foreach (Peca x in pecasEmJogo(cor))
             {
                 bool[,] mat = x.movimentosPossiveis();
+                if (mat == null) continue;
                 for (int i = 0; i < tab.linhas; i++)
                 {
                     for (int j = 0; j < tab.colunas; j++)
@@ -301,9 +302,11 @@ namespace xadrez
                         if (mat[i, j])
                         {
                             Posicao destino = new Posicao(i, j);
-                            Peca capturada = executaMovimento(x.posicao, new Posicao(i, j));
+                            if (x.posicao == null || destino == null) continue;
+                            Posicao origem = new Posicao(x.posicao.linha, x.posicao.coluna);
+                            Peca capturada = executaMovimento(x.posicao, destino);
                             bool testeXeque = estaEmCheque(cor);
-                            desfazMovimento(x.posicao, destino, capturada);
+                            desfazMovimento(origem, destino, capturada);
                             if (!testeXeque)
                             {
                                 return false;
