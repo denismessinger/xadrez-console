@@ -75,47 +75,6 @@ namespace xadrez
             return pecaCapturada;
         }
 
-        public void realizaJogada(Posicao origem, Posicao destino)
-        {
-            Peca pecaCapturada = executaMovimento(origem, destino);
-            if (estaEmCheque(jogadorAtual))
-            {
-                desfazMovimento(origem, destino, pecaCapturada);
-                throw new TabuleiroException("Jogada inválida, ficará em cheque!");
-            }
-
-            if (estaEmCheque(adversaria(jogadorAtual)))
-            {
-                xeque = true;
-            }
-            else
-            { 
-                xeque = false;
-            }   
-
-            if (testeXequemate(adversaria(jogadorAtual)))
-            {
-                terminada = true;
-            }
-            else
-            {
-                turno++;
-                mudaJogador();
-            }
-
-            Peca p = tab.peca(destino);
-
-            // EnPassant
-            if (p is Peao && (destino.linha == origem.linha + 2 || destino.linha == origem.linha - 2))
-            {
-                vulneravelEnPassant = p;
-            }
-            else
-            {
-                vulneravelEnPassant = null;
-            }
-        }
-
         public void desfazMovimento(Posicao origem, Posicao destino, Peca capturada)
         {
             Peca p = tab.retirarPeca(destino);
@@ -165,6 +124,62 @@ namespace xadrez
                 }
             }
         }
+
+        public void realizaJogada(Posicao origem, Posicao destino)
+        {
+            Peca pecaCapturada = executaMovimento(origem, destino);
+            if (estaEmCheque(jogadorAtual))
+            {
+                desfazMovimento(origem, destino, pecaCapturada);
+                throw new TabuleiroException("Jogada inválida, ficará em cheque!");
+            }
+
+            Peca p = tab.peca(destino);
+            if (p is Peao)
+            {
+                if ((p.Cor == Cor.Branca && destino.linha == 7) || (p.Cor == Cor.Preta && destino.linha == 0))
+                {
+                    p = tab.retirarPeca(destino);
+                    pecas.Remove(p);
+                    Peca rainha = new Rainha(p.Cor, tab);
+                    tab.colocarPeca(rainha, destino);
+                    pecas.Add(rainha);
+                }
+            }
+
+            if (estaEmCheque(adversaria(jogadorAtual)))
+            {
+                xeque = true;
+            }
+            else
+            { 
+                xeque = false;
+            }
+
+            if (testeXequemate(adversaria(jogadorAtual)))
+            {
+                terminada = true;
+            }
+            else
+            {
+                turno++;
+                mudaJogador();
+            }
+
+            
+
+            // EnPassant
+            if (p is Peao && (destino.linha == origem.linha + 2 || destino.linha == origem.linha - 2))
+            {
+                vulneravelEnPassant = p;
+            }
+            else
+            {
+                vulneravelEnPassant = null;
+            }
+        }
+
+        
 
         public void validarPosicaoDeOrigem(Posicao pos)
         {
